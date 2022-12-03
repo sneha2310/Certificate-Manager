@@ -1,0 +1,74 @@
+{% extends 'layouts/base.html' %}
+
+{% comment %} {% block title %}crtGeneration{% endblock title %} {% endcomment %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+{% load static %}
+    <!-- Header -->
+    <div class="header bg-default pb-6">
+      <div class="container-fluid">
+      </div>
+    </div>
+    <!-- Page content -->
+    <div class="container-fluid mt--6" >
+            <div class="header-body">
+                        <div class="row align-items-center py-4">
+                            <div class="col-lg-6 col-7">
+                              <h6 class="h2 text-white d-inline-block mb-0">CRT GENERATION</h6>
+                            </div>
+                        </div>
+                <!-- Card stats -->
+                <div class="card" style="background-image: url('{% static 'assets/img/brand/bg1.png' %}');">
+                  <div class="card-body">
+                      <form method="POST" enctype="multipart/form-data">
+                          {% csrf_token %}
+                      
+                                    <div class="row">
+                                      <select  id="folder" name="folder"  type="file" class='form-control'>
+                                        <option selected="selected" enabled>Open CSR</option>
+                                        {% for item in data %}
+                                        <option>{{item}}</option>
+                                        {% endfor %} 
+                                      </select>
+                                    </div>
+                                    <br>
+                                    <div class="row form-inline">
+                                        <div class="col-md-12 text-right">
+                                            <input class="btn btn-danger float-right" type="submit"  id="deleteFolder" name="deleteFolder" value="DELETE">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="text-center mx-4">
+                                            <input type="file" id="zipfileUploaded" name="zipfileUploaded" class="btn btn-primary my-4" accept="zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed" />
+                                        </div>
+                                    </div>
+                                    {% if error %}<div class='text=danger'>{{error}}</div>{% endif %}
+                                    <div class="row">
+                                        <div class="text-center mx-4">
+                                            <button type="submit"  id="UploadfileSubmit"  name="UploadfileSubmit" class="btn btn-primary my-4">Submit</button>
+                                        </div>
+                                      </form>
+                                        {% comment %} <a type="submit" class="btn btn-primary my-4" href="{% url 'fileapp:dwnfile' %} ">Download CSR</a>  {% endcomment %}
+                                        {% comment %} {% if conform %} {% endcomment %}
+                                        <a type="submit" class="btn btn-primary my-4" href="{% url 'fileapp:dwnzipfile' %} ">Download Zip</a> 
+                                        {% comment %} {% endif %} {% endcomment %}
+                                    </div>        
+                      
+                  </div>
+                </div>
+              </div>
+    </div>
+   
+{% endblock content %}
+
+{% block javascripts %}
+
+{% load static %}
+  <script src="{% static 'assets/vendor/chart.js/dist/Chart.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/chart.js/dist/Chart.extension.js' %}"></script>
+
+{% endblock javascripts %}

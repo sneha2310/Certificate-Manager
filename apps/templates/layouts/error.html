@@ -1,0 +1,81 @@
+
+<!--
+=========================================================
+* Digivalet Certificate Manager Dashboard 
+=========================================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>
+    Digivalet Certificate Manager
+  </title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'assets/css/argon.css' %}">
+  <link rel="icon" href="/static/assets/img/brand/favicon.png" type="image/png">
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+  <!-- Icons -->
+  <link rel="stylesheet" href="{% static 'assets/vendor/nucleo/css/nucleo.css' %}" type="text/css">
+  <link rel="stylesheet" href="{%static 'assets/vendor/@fortawesome/fontawesome-free/css/all.min.css'%}" type="text/css">
+  <!-- Specific CSS goes HERE -->
+  {% block stylesheets %}{% endblock stylesheets %}
+</head>
+
+<body class="" style="background-image: url('{% static 'assets/img/brand/bg1.png' %}');">
+  <div class="main-content">
+    {% comment %} {% include "includes/navigation-fullscreen.html" %} {% endcomment %}
+    <!-- Header -->
+    <div class="header py-7 py-lg-9">
+      <div class="container">
+        <div class="header-body text-center mb-3">
+          <div class="row justify-content-center">
+            <div class="col-lg-4 col-lg-8">
+               {% comment %} <h1 class="text-white" style="font-weight: bold; font-size:35px;">            
+                 ERROR         
+               </h1> {% endcomment %}
+            </div>
+          </div>
+        </div>
+      </div>
+      {% comment %} <div class="separator separator-bottom separator-skew zindex-100">
+        <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+          <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+        </svg>
+      </div> {% endcomment %}
+    </div>
+    {% block content %}
+
+    <!-- Page content -->
+    <div class="container mt--8 pb-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-7">
+          <div class="card bg-secondary shadow border-0">
+            <div class="card-header bg-transparent pb-5">
+
+              {% comment %} <div class="text-muted text-center mt-2 mb-3">
+               Oups! Error 404     
+              </div> {% endcomment %}
+
+              <div class="text-center mb-4">
+              <h2>
+                {{msg}}                
+              </h2>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock content %}
+  </div>
+  {% include "includes/scripts.html" %}
+  <!-- Specific JS goes HERE --> 
+  {% block javascripts %}{% endblock javascripts %}
+  <script src="{% static 'assets/css/argon.css' %}"></script> 
+</body>
+</html>

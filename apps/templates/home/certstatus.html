@@ -1,0 +1,167 @@
+{% extends 'layouts/base.html' %}
+
+{% comment %} {% block title %} Tables {% endblock title %} {% endcomment %}
+
+{% block content %}
+{% load static %}
+  <div class="header bg-default pb-6">
+        <div class="container-fluid">
+            <div class="header-body">
+                  <div class="row align-items-center py-4">
+                      <div class="col-lg-6 col-7">
+                                    <h6 class="h2 text-white d-inline-block mb-0">CERT EXPIRY STATUS</h6>
+                                    <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                                          <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                                                <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+                                                <li class="breadcrumb-item"><a href="#">Status</a></li>
+                                                {% comment %} <li class="breadcrumb-item active" aria-current="page">Tables</li> {% endcomment %}
+                                          </ol>
+                                    </nav>
+                      </div>
+                  </div>
+            </div>
+        </div>
+  </div>
+  
+  <!-- Page content -->
+  <div class="container-fluid mt--6">
+    <div class="row">
+      <div class="col">
+        <div class="card" >
+          <div class="row">
+            <div class="col">
+              <div class="card" style="background-image: url('{% static 'assets/img/brand/bg1.png' %}');">
+                <div class='row'>
+                            <div class="card-header bg-transparent border-0">
+                              <h3 class="text-dark mb-0">EXPIRY STATUS</h3>
+                            </div>
+                            <!--############################################################## REPORT GENERATION ######################################################-->
+                            <div class="col-8 m-2 text-right"   style="margin-left: 123px;">
+                              <button type="button" class="btn btn-primary" my-1 mx-0 data-toggle="modal" data-target="#exampleModalCenter">Generate Report</button>
+                            </div>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">REPORT GENERATOR</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>                       
+                                    <form method='POST' id="reportgen">
+                                      {% csrf_token %}
+                                        <div class="modal-body">
+                                            <div class="form-group container">
+                                              <div class="row">
+                                                <div class="col-lg-12">                                                                            
+                                                  <div id="tag-container" class="tag-container">
+                                                    <div class="input-group input-group-md">                                                                          
+                                                      <input id="myInput" type="text" class="form-control" placeholder="Reciever Email Address" name="Reciever Email Address">                                                                            
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>                                                        
+                                              <br>
+                                              <br>
+                                              <div class="row">
+                                                    <div class="col-3">
+                                                      <input type="checkbox" class="form-check-input" id="15" name="15days" value="15">
+                                                      <label class="form-check-label">15 days</label>
+                                                    </div>
+                                                
+                                                    <div class="col-3">
+                                                      <input type="checkbox" class="form-check-input" id="30" name="30days" value="30">
+                                                      <label class="form-check-label">30 days</label>
+                                                    </div>
+                                              </div>                                                           
+                                              <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Generate</button>
+                                                {% comment %} <div class="btn" onclick="send()">SEND</div> {% endcomment %}
+                                              </div>           
+                                          </div>
+                                        </div>
+                                      </form>                                                                            
+                                </div>
+                              </div>
+                            </div>    
+                              {% comment %} </div>
+                              <br>
+                              <div class='row'>     
+                                 {% endcomment %}
+                              <div class="col-0 m-2 "> 
+                                <button type="submit" class="btn btn-primary" my-1 mx-0 data-toggle="modal" data-target="#exampleModalFqdn">Unreachable</button>
+                              </div>
+                                <!-- Modal -->
+                              <div class="modal fade" id="exampleModalFqdn" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                  <div class="modal-content">
+                                      <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLongTitle">FQDN</h5>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                      </div>
+                                      <table class="table">
+                                          <thead>
+                                            <tr>
+                                              <th scope="col">#</th>
+                                              <th scope="col">FQDN</th>                                                          
+                                            </tr>
+                                          </thead>
+                                          <tbody class="list">
+                                            {% for i in data_items %}                                                                                                                                                                                                                   
+                                              <tr class="text-md-left">                                                       
+                                                <th scope="row" class="text">{{forloop.counter}}</th>                                                                                             
+                                                <td class="text-lg-left">{{i}}</td>                                                                                                                                                                                                             
+                                              </tr>                                                                             
+                                            {% endfor %}                                                   
+                                          </tbody>                                                     
+                                      </table>                                                                                                                                                                                
+                                      </div>
+                                    </div>                                     
+                                  </div>  
+                                  <form method='POST'> 
+                                      {% csrf_token %}   
+                                    <div class="col-1 m-2 "> 
+                                      {% comment %} <button type="submit" class="btn btn-primary" id="updateButton" name="updateButton" >Update</button> {% endcomment %}
+                                      <input class="btn btn-primary " type="submit"  id="updateButton" name="updateButton" value="Refresh">
+                                    </div>
+                                  </form>                                                                                                      
+                                </div>
+            <div class="container">
+            {% for fqdn,expire in expander.items %}
+              <div id="accordion">
+                <div class="card-deck">
+                  <div class="card bg-light">                            
+                    <div class="card-header collapsed card-link text-dark text-center" 
+                        data-toggle="collapse" 
+                        data-target="#collapse-{{forloop.counter}}">
+                          {{fqdn}}
+                    </div>
+                    <div id="collapse-{{forloop.counter}}" 
+                        class="collapse" 
+                        data-parent="#accordion">
+                        <div class="card-body text-center">
+                          {% for i,j in expire.items %}<div class="panel-body text-dark">{{i}}:{{j}}</div>{% endfor %}
+                        </div>
+                    </div> 
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+            </div>
+               </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}{% endblock javascripts %}

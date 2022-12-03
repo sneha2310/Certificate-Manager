@@ -1,0 +1,134 @@
+{% extends 'layouts/base.html' %}
+
+{% load static %}
+{% comment %} {% block title %} csrGenerstion {% endblock title %} {% endcomment %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <!-- Header -->
+    <div class="header bg-default pb-6">
+      <div class="container-fluid">
+        <div class="header-body">
+          <div class="row align-items-center py-4">
+            <div class="col-lg-6 col-7">
+              <h6 class="h2 text-white d-inline-block mb-0">CSR Generation</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Page content -->
+    <div class="container-fluid mt--6">
+        <div class="row">
+            <div class="col-xl-12">
+                {% comment %} <div class="card" style="background-image: url('{% static 'assets/img/brand/bg2.png' %}');"> {% endcomment %}
+                    <div class="card" style="background-image: url('{% static 'assets/img/brand/bg1.png' %}');">
+                    <div class="card-body">
+                        {% comment %} <form method="POST"  onsubmit="return validateForm()" id="csrgen"> {% endcomment %}
+                            <form method="POST">
+                            {% csrf_token %}
+                            <h6 class="heading-small text-muted mb-4">CSR GENERATION</h6>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="input">DNS.1</label>
+                                                    <input type="dns" id="dns1" class="form-control text-dark" placeholder="DNS.1" name="dns1">
+                                                    {% comment %} <label class="form-control-label text-danger" id="dns_inp1">Invalid DNS Entry</label> {% endcomment %}
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="input">DNS.2</label>
+                                                    <input type="dns" id="dns2" class="form-control text-dark" placeholder="DNS.2" name="dns2">
+                                                    {% comment %} <label class="form-control-label text-danger" id="dns_inp2">Invalid DNS Entry</label> {% endcomment %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="input">DNS.3</label>
+                                                    <input type="dns" id="dns3" class="form-control text-dark" placeholder="DNS.3" name="dns3">
+                                                    {% comment %} <label class="form-control-label text-danger" id="dns_inp3">Invalid DNS Entry</label> {% endcomment %}
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="input">DNS.4</label>
+                                                    <input type="dns" id="dns4" class="form-control text-dark" placeholder="DNS.4" name="dns4">
+                                                    {% comment %} <label class="form-control-label text-danger" id="dns_inp4">Invalid DNS Entry</label> {% endcomment %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="input">DNS.5</label>
+                                                    <input type="dns" id="dns5" class="form-control text-dark" placeholder="DNS.5" name="dns5">
+                                                    {% comment %} <label class="form-control-label text-danger" id="dns_inp5">Invalid DNS Entry</label> {% endcomment %}
+                                                    {% comment %} <label class="form-control-label text-danger" id="dns">Invalid public IP</label> {% endcomment %}
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="input">DNS.6</label>
+                                                    <input type="dns" id="dns6" class="form-control text-dark" placeholder="DNS.6" name="dns6">
+                                                    {% comment %} <label class="form-control-label text-danger" id="dns_inp6">Invalid DNS Entry</label> {% endcomment %}
+                                                    {% comment %} <label class="form-control-label text-danger" id="dns">Invalid local IP</label> {% endcomment %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="input">DNS.7</label>
+                                                    <input type="dns" id="dns7" class="form-control text-dark" placeholder="DNS.7" name="dns7">
+                                                    {% comment %} <label class="form-control-label text-danger" id="dns_inp7">Invalid DNS Entry</label> {% endcomment %}
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="input">DNS.8</label>
+                                                    <input type="dns" id="dns8" class="form-control text-dark" placeholder="DNS.8" name="dns8">
+                                                    {% comment %} <label class="form-control-label text-danger" id="dns_inp8">Invalid DNS Entry</label> {% endcomment %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="pl-lg-4">
+                                            <div class="row">
+                                                <div class="text-center mx-4"> 
+                                                    <div class="text-center">
+                                                    <button type='submit' class="btn btn-primary my-4">ADD</button>
+                                                    {% comment %} <input onclick="submitForm()" type="submit" value="Submit" id="btnsubmit" value="button"> {% endcomment %}
+                                                    {% comment %} <input type="submit" class="btn btn-primary my-4" href=""  value="Add">  {% endcomment %}
+                                                    {% comment %} <input type='reset'> {% endcomment %}
+                                                </div>      
+                                                </div>
+                                            </div>
+                                        </div>
+                            </form>
+                        </div>                                    
+                        {% if text %}<div class="border: 5px " style="text-align: center;"><pre style="font-family: Georgia; font-size: 12pt; color: #000099;">{{text}}</pre></div><br><div class="text-center"> <a type="submit" class="btn btn-primary my-4" href="{% url 'fileapp:dwnfile' %} ">Download CSR</a> </div>                        
+                        {% comment %} {% else %} </div><div>elseinside</div><a type="submit" class="btn btn-primary my-4" href="{% url 'fileapp:dwnfile' %} ">Download CSR</a> </div> {% endcomment %}
+                        {% endif %}     
+                    </div>                
+            </div> 
+        </div>
+         {% if msg %}<div>{{msg}}</div><div class="text-danger">{{msg}}</div>{% endif %}
+      {% include "includes/footer.html" %}
+    </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}
+{% load static %}
+  <script src="{% static 'assets/vendor/chart.js/dist/Chart.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/chart.js/dist/Chart.extension.js' %}"></script>
+{% endblock javascripts %}
+
+

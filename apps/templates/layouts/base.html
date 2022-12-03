@@ -1,0 +1,47 @@
+<!--
+=========================================================
+* Digivalet Certificate Manager Dashboard 
+=========================================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="canonical" href="https://appseed.us/admin-dashboards/django-dashboard-argon">
+  
+  <title>
+     {% block title %} Digivalet-Certificate-Manager {% endblock %} 
+  </title>
+  {% load static %}
+  <!-- CSS -->
+  <link rel="stylesheet" href="{% static 'assets/css/argon.css' %}">
+  <!-- Brand Logo -->
+  <link rel="icon" href="{% static 'assets/img/brand/icon.png' %}">
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+  <!-- Icons -->
+  <link rel="stylesheet" href="{% static 'assets/vendor/@fortawesome/fontawesome-free/css/all.min.css' %}" type="text/css">
+  {% comment %} <link rel="stylesheet" href="{% static 'assets/css/argon.css?v=1.2.0' %}" type="text/css"> {% endcomment %}
+  <link rel="stylesheet" href="{% static 'assets/css/argon.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'assets/css/argon.min.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'assets/css/argon.css.map' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'assets/js/argon.js' %}" type="text/css">
+  <link rel="stylesheet" href="index.css">
+  <!-- Specific CSS goes HERE -->
+  {% block stylesheets %}{% endblock stylesheets %}
+</head>
+{% comment %} <body class="" onload="loadPage();"> {% endcomment %}
+<body class="">
+  {% include "includes/sidenav.html" %}
+  <div class="main-content" id="panel">
+    {% include "includes/navigation.html" %}
+    {% block content %}{% endblock content %}
+  </div>
+  {% include "includes/scripts.html" %}
+  <!-- Specific JS goes HERE --> 
+  {% block javascripts %}{% endblock javascripts %}
+  <script src="{% static 'assets/css/argon.css' %}"></script>
+</body>
+</html>

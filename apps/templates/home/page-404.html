@@ -1,0 +1,40 @@
+{% extends 'layouts/error.html' %}
+
+{% comment %} {% block title %} Error {% endblock title %} {% endcomment %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+<div class="main-content">
+  {% comment %} {% include "includes/navigation-fullscreen.html" %} {% endcomment %}
+  <!-- Header -->
+
+
+{% block content %}
+
+    <!-- Page content -->
+    <div class="container mt--8 pb-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-7">
+          <div class="card bg-secondary shadow border-0">
+            <div class="card-header bg-transparent pb-5">
+
+              {% comment %} <div class="text-muted text-center mt-2 mb-3">
+               Oups! Error 404     
+              </div> {% endcomment %}
+
+              <div class="text-center mb-4">
+              <h2>
+                {{msg}}                
+              </h2>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}{% endblock javascripts %}

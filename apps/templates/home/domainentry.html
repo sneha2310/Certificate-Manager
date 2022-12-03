@@ -1,0 +1,171 @@
+{% extends 'layouts/base.html' %}
+
+{% comment %} {% block title %}csrGeneration {% endblock title %} {% endcomment %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+{% load static %}
+    <!-- Header -->
+    <div class="header bg-default pb-6">
+      <div class="container-fluid">
+        <div class="header-body">
+          <div class="row align-items-center py-4">
+            <div class="col-lg-6 col-7">
+              <h6 class="h2 text-white d-inline-block mb-0">HOST ENTRY</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page content -->
+    <div class="container-fluid mt--6">
+            <div class="row">
+              <div class="col-xl-12">
+                <div class="card" >
+                          <div class="card-header">
+                                <div class="row align-items-center">
+                                  <div class="col-8">
+                                      <h3 class="mb-0">ADD HOST </h3>
+                                  </div>
+                                </div>
+                          </div>
+                          <!--  HOST ENTRY -->
+                          <div class="card-body" style="background-image: url('{% static 'assets/img/brand/bg1.png' %}');">
+                              {% comment %} <form method="POST" onsubmit="return validateForms()" id="domainent"> {% endcomment %}
+                                <form method="POST">
+                                  {% csrf_token %}
+                                  <h6 class="heading-small text-muted mb-4">NEW HOST ENTRY</h6>
+                                      <div class="pl-lg-4">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label class="form-control-label" for="input">Enter IP</label>
+                                                            <input type="add" id="ipvalue" class="form-control text-dark" placeholder="Enter IP" name="IP" required>
+                                                            {% comment %} <label class="form-control-label text-danger" id="domain_inp1">Invalid IP Entry</label> {% endcomment %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label class="form-control-label" for="input">Enter FQDN</label>
+                                                            <input type="add" id="fqdnvalue" class="form-control text-dark" placeholder="Enter FQDN" name="FQDN" required>
+                                                            {% comment %} <label class="form-control-label text-danger" id="domain_inp2">Invalid FQDN Entry</label> {% endcomment %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                  <div class="col-md-12 text-right ">
+                                                    <button type="submit" class="btn btn-primary" data-toggle="button">ADD</button>
+                                                  </div>
+                                                </div>
+                                      </div>
+                              </form>
+                            <!-- UPDATE HOST ENTRY -->
+                                  <br>
+                            <form method="POST"  onsubmit="return validateFormsip()" id="oldnewip">
+                                    {% csrf_token %}
+                                  <h6 class="heading-small text-muted mb-4">UPDATE HOST ENTRY</h6>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="input">Old IP</label>
+                                                    <input type="text" id="oldip" class="form-control text-dark" placeholder="Old IP" name="OldIP" required>                                                    
+                                                    {% comment %} <label class="form-control-label text-danger" id="old_inp">Invalid IP</label> {% endcomment %}
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="input">Old FQDN</label>
+                                                    <input type="update" id="oldfqdn" class="form-control text-dark" placeholder="Old FQDN" name="OldFQDN" required>
+                                                    
+                                                    {% comment %} <label class="form-control-label text-danger" id="old_fqdn">Invalid</label> {% endcomment %}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="input">New IP</label>
+                                                    <input type="update" id="newinp" class="form-control text-dark" placeholder="New IP" name="NewIP" required>
+                                                  
+                                                    {% comment %} <label class="form-control-label text-danger" id="new_inp">Invalid IP</label> {% endcomment %}
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="input">New FQDN</label>
+                                                    <input type="update" id="newfqdn" class="form-control text-dark" placeholder="New FQDN" name="NewFQDN" required>
+                                          
+                                                    {% comment %} <label class="form-control-label text-danger" id="new_fqdn">Invalid</label> {% endcomment %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="pl-lg-4">
+                                            <div class="row">
+                                                <div class="col-md-12 text-right ">
+                                                  <button type="update" class="btn btn-primary">Update</button>
+                                                </div>
+                                            </div>                                          
+                                        </div> 
+                                      </form>
+                                        <br>
+                                      </div>
+
+                                      <div class="row">
+                                        <div class="col">
+                                          <div class="card bg-default shadow" >
+                                            <div class="card-header bg-transparent border-0">
+                                              <h3 class="text-white mb-0">EXISTING DOMAIN ENTRY</h3>
+                                            </div>
+                                            <div class="table-responsive">
+                                              <table class="table align-items-center table-dark table-flush" >
+                                                <thead >
+                                                  <tr>
+                                                    {% comment %} <th scope="col" class="sort" data-sort="name">Index</th> {% endcomment %}                                                    
+                                                    <th scope="col" class="sort" data-sort="status">FQDN</th>
+                                                    <th scope="col" class="sort" data-sort="budget">IP</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody class="list">
+                                                  {% for i,j in data.items %}  
+                                                  {% for k,l in j.items %}                                                                                                                                                            
+                                                    <tr class="text-md-left">                                                       
+                                                      {% comment %} <th scope="row" class="text">{{forloop.counter}}</th>                                                                                                     {% endcomment %}
+                                                      <td class="text-lg-left">{{k}}</td>                                              
+                                                      <td>{{l}}</td>                                                                                                    
+                                                    </tr>                  
+                                                    {% endfor %}  
+                                                    {% endfor %}                                                                                           
+                                                </tbody> 
+                                              </table>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+    
+
+      {% include "includes/footer.html" %}
+
+    </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}
+
+{% load static %}
+  <script src="{% static 'assets/vendor/chart.js/dist/Chart.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/chart.js/dist/Chart.extension.js' %}"></script>
+
+{% endblock javascripts %}
