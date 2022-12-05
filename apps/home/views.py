@@ -31,14 +31,13 @@ password_mine = os.getenv('password_mine')
 client = WebClient(token=os.getenv('token'))
 channel_id = "D043GTBAVEV"
 base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-# print('email',email_mine.strip(), type(email_mine))
-# print('password_mine',password_mine.strip(), type(password_mine))
+
 # ------------------------------------------------------------------------------------------------------
 
 def ids_func(i):
         result=client.chat_deleteScheduledMessage(
                 channel=channel_id, scheduled_message_id=i)
-        print(result)
+        # print(result)
     
 # delete the scheduled messages 
 def delete_scheduled_messages(ids):
@@ -152,8 +151,7 @@ def index(request):
             txt = '\n'.join(dns_openssl)
             try:
                 if not os.path.isdir(os.path.join(os.getcwd(),'das_folders',dns_name_data)):                       
-                        text = csrgenerate(dns_name_data,txt)  
-                        print(text)                        
+                        text = csrgenerate(dns_name_data,txt)                                         
                         if text:                             
                             context['text'] =text                                
                             with open('temp.txt','w') as f:
@@ -176,8 +174,7 @@ def index(request):
                 pass
         except:
             print("Exception")
-        context['segment'] = 'load_template'
-        print(context)
+        context['segment'] = 'load_template'        
         html_template = loader.get_template('home/index.html')
         return HttpResponse(html_template.render(context, request))
     return render(request,'home/index.html')  
@@ -272,9 +269,9 @@ def crtgeneration(request):
                     name_of_file = request.POST['folder']      
                     try: 
                         data = os.listdir("das_folders/"+name_of_file)  
-                        print(data)
+                        # print(data)
                         for i in ["csrgenerate","server.key","openssl.cnf","verify",name_of_file+'.csr','all_fqdns.txt']:
-                            print('Hey', i not in data,i)
+                            # print('Hey', i not in data,i)
                             if i not in data:                       
                                 url = reverse('fileapp:error')
                                 return  HttpResponseRedirect(url)                            
@@ -400,7 +397,6 @@ def crtgeneration(request):
 @login_required(login_url="/login/")
 def zipfiledown(request):
     context = dict()
-    print(request.method)
     try:
         if 'tempcrt.txt' in os.listdir():        
             with open('tempcrt.txt','r') as f:
@@ -544,7 +540,7 @@ def expire_data(data):
             expire_data_for_append = i.split(" ", 1)[1]            
             expire_data_for_append_split = expire_data_for_append.split()            
             next_thirty_days = datetime.strptime(expire_data_for_append_split[5]+" "+expire_data_for_append_split[2]+" "+expire_data_for_append_split[3], '%Y %b %d') 
-            print(datetime.date(next_thirty_days), next_thirty_days, new_data, datetime.date(next_thirty_days) <= new_data)                       
+            # print(datetime.date(next_thirty_days), next_thirty_days, new_data, datetime.date(next_thirty_days) <= new_data)                       
             if datetime.date(next_thirty_days) <= new_data:
                 expire_data.append(i.split(" ", 1)[1])
                 fqdns.append(re.sub(':','',i.split(" ", 1)[0]))
@@ -562,8 +558,7 @@ def reportgenration(mail_id, days):
              # -------------------------------------------- Mail Subject ---------------------------------------------------------- 
             msg['Subject'] = 'DIGIVALET-CERTIFICATE-MANAGER'
             value = expire_data(days)
-            body_content = False
-            print(value)
+            body_content = False            
             if not value.empty:
                 start = (f"""<html>
                             <body>
@@ -629,8 +624,7 @@ def certexpirydetails(request):
                     return HttpResponseRedirect('certexpirydetails')
                 except:
                     print('Wrong pattern')
-            elif updateButton=='Refresh':
-                    print('Hey')
+            elif updateButton=='Refresh':                
                     with open('/usr/bin/cert-url','r') as f:
                         values_cert = (f.readlines())
                     values_cert_url = []
@@ -685,8 +679,7 @@ def certexpirydetails(request):
                                 f.write('%s:%s\n' % (key, value))
                             else:
                                 for i,j in value.items():
-                                    f.write('%s:%s\n' % (i, j))
-                    print(expand)
+                                    f.write('%s:%s\n' % (i, j))            
                     with open("unping.txt", 'w') as f: 
                         for i in expand:
                             f.write(i+'\n')                     
@@ -700,10 +693,8 @@ def certexpirydetails(request):
             data = f.read()     
         with open('unping.txt', 'r') as f:
             data_items = f.readlines()    
-        print(data)
         data = str(data).replace("'",'"')  
         expander_dict = json.loads(data)
-        print(expander_dict)
         context['data_items'] = data_items
         context['expander'] = expander_dict
         html_template = loader.get_template('home/certstatus.html')

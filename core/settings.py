@@ -32,19 +32,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # "corsheaders",
     'apps.home'  # Enable the inner home (home)
 ]
 
 MIDDLEWARE = [
-    # "corsheaders.middleware.CorsMiddleware",
-    
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    # 'django.core.context_processors.csrf',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -114,51 +110,15 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-# CORS_ORIGIN_ALLOW_ALL = True
-# CORS_ORIGIN_WHITELIST = (
-#   'http://localhost:9115',
-# )
-# SESSION_COOKIE_SECURE = False
-# CSRF_COOKIE_SECURE = False
-# DCS_SESSION_COOKIE_SAMESITE = "Lax"
 CSRF_COOKIE_HTTPONLY = True
 CSRF_COOKIE_SECURE = False
-#############################################################
-# SRC: https://devcenter.heroku.com/articles/django-assets
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.9/howto/static-files/
-# print(os.listdir(os.path.join(CORE_DIR, 'apps/static')))
-
-STATIC_ROOT = os.path.join(CORE_DIR,'staticfiles')
-# print(STATIC_ROOT)
 STATIC_URL = 'static/'
 STATICFILES_DIRS = (
     os.path.join(CORE_DIR, 'apps/static/'),
 )
 
-# LOGGING = {
-#     'version': 1,
-#     'disable_existing_loggers': False,
-#     'handlers': {
-#         'console': {
-#             'class': 'logging.StreamHandler',
-#         },
-#     },
-#     'root': {
-#         'handlers': ['console'],
-#         'level': 'WARNING',
-#     },
-#     'loggers': {
-#         'django': {
-#             'handlers': ['console'],
-#             'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
-#             'propagate': False,
-#         },
-#     },
-# }
-
+print('BASE DIR', BASE_DIR)
 LOGGING = {
     'version': 1,
     'loggers':{
@@ -170,14 +130,14 @@ LOGGING = {
     'handlers':{
         'infoLogs':{
             'level':'INFO',
-            'class':'logging.FileHandler',
-            'filename':str(BASE_DIR)+'/logs/app.log',
+            'class':'logging.StreamHandler',
+            # 'filename':str(BASE_DIR)+'/logs/app.log',
             'formatter':'simple',
         },
         'warningLogs':{
             'level':'WARNING',
-            'class':'logging.FileHandler',
-            'filename':str(BASE_DIR)+'/logs/error.log',
+            'class':'logging.StreamHandler',
+            # 'filename':str(BASE_DIR)+'/logs/error.log',
             'formatter':'simple',
         },
         'console': {
@@ -199,7 +159,7 @@ LOGGING = {
 }
 
 CRONJOBS  = [
-    # ('*/1 * * * *','apps.home.cron.print_hello')
+    ('*/1 * * * *','apps.home.cron.print_hello')
 ]
 
 # ldap authentication
@@ -208,7 +168,6 @@ import ldap
 from django_auth_ldap.config import LDAPSearch, LDAPGroupQuery,GroupOfNamesType,PosixGroupType
 
 AUTH_LDAP_SERVER_URI = 'ldap://localhost:10389/' 
-print("Hey")
 AUTH_LDAP_BIND_DN = 'cn=admin,dc=planetexpress,dc=com'
 AUTH_LDAP_BIND_PASSWORD = 'GoodNewsEveryone'
 AUTH_LDAP_USER_SEARCH = LDAPSearch('dc=planetexpress,dc=com',ldap.SCOPE_SUBTREE, '(uid=%(user)s)')
@@ -216,7 +175,7 @@ AUTH_LDAP_GROUP_SEARCH = LDAPSearch('dc=planetexpress,dc=com',ldap.SCOPE_SUBTREE
 AUTH_LDAP_GROUP_TYPE = GroupOfNamesType(name_attr="cn")
 AUTH_LDAP_MIRROR_GROUPS = True
 
-    # Populate the Django user from the LDAP directory.
+# Populate the Django user from the LDAP directory.
 AUTH_LDAP_REQUIRE_GROUP = "cn=enabled,ou=groups,dc=planetexpress,dc=com"
 
 AUTH_LDAP_USER_ATTR_MAP = {
@@ -239,11 +198,7 @@ AUTH_LDAP_USER_FLAGS_BY_GROUP = {
 AUTH_LDAP_ALWAYS_UPDATE_USER = True
 AUTH_LDAP_FIND_GROUP_PERMS = True
 AUTH_LDAP_CACHE_TIMEOUT = 3600
-    
 AUTH_LDAP_FIND_GROUP_PERMS = True
-    
-    # Keep ModelBackend around for per-user permissions and maybe a local
-    # superuser.
 AUTHENTICATION_BACKENDS = (
         'django_auth_ldap.backend.LDAPBackend',
         'django.contrib.auth.backends.ModelBackend',

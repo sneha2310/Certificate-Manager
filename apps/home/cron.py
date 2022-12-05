@@ -30,7 +30,7 @@ def message_scheduler(result1,fqdn,dt):
     ids.append(id_)
             
 def schedule_thirtydays(fqdn,d,dt):
-    result = d + timedelta(hours=19, minutes=19, seconds=00)
+    result = d + timedelta(hours=18, minutes=00, seconds=00)
     message_scheduler(result.strftime('%s'),fqdn,dt)
     
 # scheduled the messages
@@ -54,35 +54,26 @@ with open(BASE_DIR+'/certrecord.txt') as f:
             fqdn.append(data_fqdn)
             print(data[-1])
             out.append(data[-1].split())
-    print('out_fqdn_values: ', fqdn)
-    print('OUT: ', out)
     for k in out:
         if len(k) != 0:
             dates_expire.append(datetime.strptime(k[3]+" "+k[0]+" "+k[1], '%Y %b %d').strftime('%Y-%m-%d') )
-    print(dates_expire)
 
 fqdn_dict={}
 if len(fqdn) == len(dates_expire):
     for i in range(len(fqdn)):     
         fqdn_dict[fqdn[i]] = dates_expire[i]
 
-
 cpr_currentdate=[]
 for i in dates_expire:
     date_time_str = i
     date_time_obj = datetime.strptime(date_time_str, '%Y-%m-%d')
     cpr_currentdate.append(date_time_obj- timedelta(days=30))
-print('cpr_currentdate: ',cpr_currentdate)
 count = 0
 ids = []
 for i in cpr_currentdate:
     dt = (datetime.now())  
-    print(str(i)==str(dt.replace(hour=0, minute=0, second=0, microsecond=0)))
-    print(i,(dt.replace(hour=0, minute=0, second=0, microsecond=0)))
     if i==(dt.replace(hour=0, minute=0, second=0, microsecond=0)):
         dt = dt.replace(hour=0, minute=0, second=0, microsecond=0)
-        print('fqdn[count]: ',fqdn,count, i,dt)
-        print('fqdn: ',fqdn)
         schedule_messages(fqdn[count], i,dt)
     count+=1
     
