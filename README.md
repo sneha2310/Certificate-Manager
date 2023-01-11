@@ -69,7 +69,8 @@ The user gets the list of all the Fqdn which are unreachable using this button.
 
 
 
-Release Notes Template
+## Release Notes Template
+
 Company / Product Name : Certificate-Manager
 Version: 1.2.3
 Date:
