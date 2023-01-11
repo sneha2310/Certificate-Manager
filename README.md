@@ -35,7 +35,7 @@ From this page, users can easily add the entry of the host as well as update the
 
 We can also visualize the IP of the FQDN whose certificate is generated. 
 
-![domaininventory2.png](/sync/domaininventory2.png)
+![domaininventory2.png](/sync/domainInventory2.png)
 
 
 URL Inventory:
