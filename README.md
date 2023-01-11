@@ -1,9 +1,5 @@
 # Certificate-Manager
 
-# Digivalet-Certificate-Manager
-
-Digivalet Certificate Manager
-
 It is a tool used to create, generate as well as manage the Digivalet certificate. It manages the expiry time of the particular certificate along with which we can also generate a report and send it to multiple users at the same time on the email.  
 
 ## Login page:
