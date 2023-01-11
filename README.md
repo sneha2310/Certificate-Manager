@@ -24,7 +24,7 @@ The user enters the DNS as per requirement like das.example.digivalet.com and cl
 
 This page generates the certificate as per the user requirement. The Open CSR dropdown displays all the created certificates. The user has the access to delete the created certificate. The user can select the file from the Choose file required as per the desired created certificate and then submit. On clicking on the submit button, the user gets the zip file as per the requirement.
 
-![crtgeneration.png](/sync/crtgeneration.png)
+![crtgeneration.png](/sync/crtgenerate.png)
 
 
 ## Domain Inventory:
