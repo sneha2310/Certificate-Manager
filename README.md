@@ -17,7 +17,9 @@ As the user logged-in, the user sees the CSR generation page. The user can easil
 The user enters the DNS as per requirement like das.example.digivalet.com and clicks on the add button. The certificate is generated as shown below with the certificate which will be downloaded when the user clicks on the Download CSR button.
 
 ![csrgeneration1.png](/sync/csrgeneration1.png)
+
 ![csrgeneration2.png](/sync/csrgeneration2.png)
+
 ![csrgeneration3.png](/sync/csrgeneration3.png)
 
 ## CRT Generation:
